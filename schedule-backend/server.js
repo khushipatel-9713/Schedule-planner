@@ -26,26 +26,27 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'https://schedule-planner-frontend.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 app.use(express.json());
 app.use("/reports",reportRouter)
 app.use("/habits",router);
-app.use("/api/auth", authRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/calendar", calendarRoutes);
-app.use("/api/distractions", distractionRoutes);
-app.use('/api/events', eventRoutes);
-app.use('/api/focus', focusRoutes);
-app.use('/api/goals', goalRoutes);
-// app.use("/api/habits", habitRoutes);
-app.use('/api/notifications', notificationRoutes);
-app.use('/api/profile', profileRoutes);
-app.use('/api/settings', settingsRoutes);
-app.use('/api/smart-scheduler', smartSchedulerRoutes);
-app.use("/api/tracker", trackerRoutes);
-app.use("/api/tasks", taskRoutes);
-// app.use("/api/habits", habitsRoutes);
-app.use('/api/home', homeRoutes);
+app.use("/auth", authRoutes);
+app.use("/calendar", calendarRoutes);
+app.use("/distractions", distractionRoutes);
+app.use('/events', eventRoutes);
+app.use('/focus', focusRoutes);
+app.use('/goals', goalRoutes);
+app.use('/notifications', notificationRoutes);
+app.use('/profile', profileRoutes);
+app.use('/settings', settingsRoutes);
+app.use('/smart-scheduler', smartSchedulerRoutes);
+app.use("/tracker", trackerRoutes);
+app.use("/tasks", taskRoutes);
+app.use('/home', homeRoutes);
 
 app.use('/feedback',routerFeed);
 
